@@ -1,0 +1,15 @@
+{
+  "name": "web-android-auto-headunit",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Web-based Android Auto head unit for Raspberry Pi",
+  "scripts": {
+    "build": "npm run build --workspace=server",
+    "test": "npm run test --workspace=server && node --test frontend/*.test.js",
+    "test:integration": "npm run test:integration --workspace=server",
+    "fixtures": "node scripts/generate-fixtures.js",
+    "setup:host-usb": "bash scripts/install-host-usb.sh"
+  },
+  "workspaces": ["server"]
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Android Auto — Web Head Unit</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div id="unsupported">
+      <h1>WebCodecs required</h1>
+      <p>This head unit needs <code>VideoDecoder</code> (Chromium / Edge recommended).</p>
+      <p><a href="https://www.google.com/chrome/">Get Chromium-based browser</a></p>
+    </div>
+    <div id="wrap">
+      <canvas id="screen" width="1280" height="720"></canvas>
+      <div id="overlay">Connecting…</div>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

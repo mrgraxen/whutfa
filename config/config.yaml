@@ -1,0 +1,39 @@
+head_unit:
+  manufacturer: "PiHeadUnit"
+  model: "WebHU-1"
+  name: "Raspberry Pi Head Unit"
+video:
+  width: 1280
+  height: 720
+  fps: 30
+  dpi: 160
+audio:
+  media_sample_rate: 48000
+  speech_sample_rate: 16000
+server:
+  http_port: 8080
+  bind_address: "0.0.0.0"
+  access_token: ""
+  bind_localhost_only: false
+security:
+  require_token: false
+bluetooth:
+  enabled: true
+  adapter_name: "PiHeadUnit"
+  pin: "0000"
+sensors:
+  night_mode: false
+  driving_status: "parked"
+  gps:
+    enabled: false
+    latitude: 0.0
+    longitude: 0.0
+diagnostics:
+  log_level: "info"
+  ssl_clock_max_skew_sec: 300
+ipc:
+  bridge_socket: "/tmp/aa-bridge.sock"
+  video_socket: "/tmp/aa-video.sock"
+  audio_media_socket: "/tmp/aa-audio-media.sock"
+  audio_speech_socket: "/tmp/aa-audio-speech.sock"
+  audio_system_socket: "/tmp/aa-audio-system.sock"

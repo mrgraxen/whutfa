@@ -1,0 +1,7 @@
+node_modules
+server/dist
+aa-handler/build
+.git
+.github
+*.md
+!README.md

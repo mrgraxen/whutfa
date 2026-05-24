@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+*.o
+*.a
+*.so
+.DS_Store
+.env
+.idea/
+.vscode/
+aa-handler/build/
+third_party/aasdk/build/
+*.log
+coverage/
