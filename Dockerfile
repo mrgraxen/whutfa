@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential cmake \
     libboost-all-dev libusb-1.0-0-dev libssl-dev \
     libprotobuf-dev protobuf-compiler \
+    libabsl-dev \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
 RUN git clone --depth 1 --branch "${AASDK_REF}" https://github.com/opencardev/aasdk.git aasdk
