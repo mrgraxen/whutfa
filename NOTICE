@@ -1,12 +1,14 @@
 Web-Based Android Auto Head Unit
-Copyright (C) 2026 contributors
+Copyright (C) 2026 Web Android Auto Head Unit contributors
 
-The aa-handler component uses libraries and code derived from:
-- aasdk (https://github.com/opencardev/aasdk) — GNU General Public License v3.0
-- openauto (https://github.com/f1xpl/openauto) — GNU General Public License v3.0
+This project is licensed under the GNU General Public License v3.0 or later.
+See [LICENSE](LICENSE) for the full license text.
 
-Server and frontend components are provided under the MIT License unless
-otherwise noted in their respective directories.
+## Third-party components
 
-For GPLv3 source corresponding to the aa-handler binary, see the repository
-and third_party/aasdk submodule.
+- **aasdk** — https://github.com/opencardev/aasdk — GPLv3
+- **openauto** (derived patterns / future integration) — https://github.com/f1xpl/openauto — GPLv3
+
+The `aa-handler` binary links against libaasdk. Corresponding source for libaasdk
+is available via the `third_party/aasdk` git submodule and the opencardev/aasdk
+repository.

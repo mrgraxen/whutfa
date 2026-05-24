@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "version": "0.1.0",
+  "license": "GPL-3.0-or-later",
   "description": "Web-based Android Auto head unit for Raspberry Pi",
   "scripts": {
     "build": "npm run build --workspace=server",

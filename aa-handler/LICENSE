@@ -1,3 +1,4 @@
-aa-handler incorporates code derived from openauto and links libaasdk.
-Both are licensed under the GNU General Public License v3.0.
-See NOTICE at repository root.
+aa-handler is part of Web-Based Android Auto Head Unit.
+
+Licensed under the GNU General Public License v3.0 or later.
+See the LICENSE file in the repository root.

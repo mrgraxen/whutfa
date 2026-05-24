@@ -144,5 +144,6 @@ npm test
 
 ## License
 
-- Server / frontend: MIT ([LICENSE](LICENSE))
-- `aa-handler` + aasdk/OpenAuto-derived code: GPLv3 — see [NOTICE](NOTICE)
+This project is free software licensed under the **GNU General Public License v3.0 or later** ([LICENSE](LICENSE)).
+
+Third-party notices: [NOTICE](NOTICE).

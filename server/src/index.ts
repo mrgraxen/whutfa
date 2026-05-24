@@ -1,3 +1,8 @@
+/**
+ * Web-Based Android Auto Head Unit
+ * Copyright (C) 2026 contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";

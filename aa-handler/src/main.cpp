@@ -1,3 +1,6 @@
+// Web-Based Android Auto Head Unit — Copyright (C) 2026 contributors
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 #include "config.hpp"
 #include "stub_handler.hpp"
 
