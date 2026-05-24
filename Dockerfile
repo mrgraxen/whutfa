@@ -4,7 +4,8 @@ ARG AASDK_REF=newdev
 FROM debian:bookworm-slim AS aasdk-build
 ARG AASDK_REF
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential cmake git \
+    ca-certificates git \
+    build-essential cmake \
     libboost-all-dev libusb-1.0-0-dev libssl-dev \
     libprotobuf-dev protobuf-compiler \
     && rm -rf /var/lib/apt/lists/*
