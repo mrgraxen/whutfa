@@ -1,8 +1,8 @@
 services:
-  headunit:
-    image: ghcr.io/mrgraxen/android-auto:latest
+  whutfa:
+    image: ghcr.io/mrgraxen/whutfa:latest
     build: .
-    container_name: headunit
+    container_name: whutfa
     restart: unless-stopped
     privileged: true
     devices:
@@ -22,11 +22,11 @@ services:
       retries: 3
       start_period: 40s
 
-  headunit-cap-usb:
+  whutfa-cap-usb:
     profiles: ["cap_usb"]
-    image: ghcr.io/mrgraxen/android-auto:latest
+    image: ghcr.io/mrgraxen/whutfa:latest
     build: .
-    container_name: headunit
+    container_name: whutfa
     restart: unless-stopped
     privileged: false
     cap_add:
@@ -48,11 +48,11 @@ services:
       retries: 3
       start_period: 40s
 
-  headunit-stub:
+  whutfa-stub:
     profiles: ["stub"]
-    image: ghcr.io/mrgraxen/android-auto:latest
+    image: ghcr.io/mrgraxen/whutfa:latest
     build: .
-    container_name: headunit-stub
+    container_name: whutfa-stub
     restart: unless-stopped
     ports:
       - "${HTTP_PORT:-8080}:8080"

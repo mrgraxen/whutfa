@@ -1,5 +1,5 @@
 /**
- * Web-Based Android Auto Head Unit
+ * WHUTFA — Web Head Unit Transformator For Android
  * Copyright (C) 2026 contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */

@@ -34,7 +34,7 @@ export interface AppConfig {
 }
 
 const defaults: AppConfig = {
-  head_unit: { manufacturer: "PiHeadUnit", model: "WebHU-1", name: "Pi Head Unit" },
+  head_unit: { manufacturer: "WHUTFA", model: "WHUTFA-1", name: "WHUTFA Web Head Unit" },
   video: { width: 1280, height: 720, fps: 30, dpi: 160 },
   audio: { media_sample_rate: 48000, speech_sample_rate: 16000 },
   server: {
@@ -44,7 +44,7 @@ const defaults: AppConfig = {
     bind_localhost_only: false,
   },
   security: { require_token: false },
-  bluetooth: { enabled: true, adapter_name: "PiHeadUnit", pin: "0000" },
+  bluetooth: { enabled: true, adapter_name: "WHUTFA", pin: "0000" },
   sensors: {
     night_mode: false,
     driving_status: "parked",

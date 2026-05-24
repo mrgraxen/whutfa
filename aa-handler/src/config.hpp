@@ -4,9 +4,9 @@
 #include <string>
 
 struct HandlerConfig {
-  std::string manufacturer = "PiHeadUnit";
-  std::string model = "WebHU-1";
-  std::string name = "Raspberry Pi Head Unit";
+  std::string manufacturer = "WHUTFA";
+  std::string model = "WHUTFA-1";
+  std::string name = "WHUTFA Web Head Unit";
   uint32_t video_width = 1280;
   uint32_t video_height = 720;
   uint32_t video_fps = 30;

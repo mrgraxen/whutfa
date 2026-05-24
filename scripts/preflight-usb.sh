@@ -3,7 +3,7 @@
 set -e
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-RULES_INSTALLED="/etc/udev/rules.d/99-android-auto-headunit.rules"
+RULES_INSTALLED="/etc/udev/rules.d/99-whutfa.rules"
 
 echo "=== USB preflight ==="
 echo ""
@@ -35,5 +35,5 @@ echo "  2) Brief disconnect"
 echo "  3) Google 18d1:2d00 or 18d1:2d01"
 echo ""
 echo "Inside Docker:"
-echo "  docker exec headunit lsusb"
-echo "  docker logs headunit 2>&1 | tail -30"
+echo "  docker exec whutfa lsusb"
+echo "  docker logs whutfa 2>&1 | tail -30"

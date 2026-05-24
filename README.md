@@ -1,6 +1,8 @@
-# Web-Based Android Auto Head Unit
+# WHUTFA
 
-USB Android Auto head unit for Raspberry Pi (4/5, 64-bit) with a browser UI. The phone connects over USB; video (H.264) and audio (PCM) stream to any modern browser on your LAN via WebSockets. Touch input is sent back to the phone.
+**W**eb **H**ead **U**nit **T**ransformator **F**or **A**ndroid
+
+USB head unit for Raspberry Pi (4/5, 64-bit) with a browser UI. The phone connects over USB; video (H.264) and audio (PCM) stream to any modern browser on your LAN via WebSockets. Touch input is sent back to the phone.
 
 ```mermaid
 flowchart LR
@@ -35,7 +37,7 @@ The udev rules ship in this repo but must be installed on the **Linux host** tha
 sudo ./scripts/install-host-usb.sh
 ```
 
-This copies [`config/99-android-auto-headunit.rules`](config/99-android-auto-headunit.rules) to `/etc/udev/rules.d/` and reloads udev. Optional: adds your user to the `plugdev` group.
+This copies [`config/99-whutfa.rules`](config/99-whutfa.rules) to `/etc/udev/rules.d/` and reloads udev. Optional: adds your user to the `plugdev` group.
 
 Check before plugging in a phone:
 
@@ -43,9 +45,9 @@ Check before plugging in a phone:
 ./scripts/preflight-usb.sh
 ```
 
-### 2. Run the head unit (USB already in compose)
+### 2. Run WHUTFA (USB already in compose)
 
-`docker compose up` is the normal command — you do **not** pass extra `--device` flags on the CLI. Bus-level USB is already defined in [`docker-compose.yml`](docker-compose.yml) for the default `headunit` service:
+`docker compose up` is the normal command — you do **not** pass extra `--device` flags on the CLI. Bus-level USB is already defined in [`docker-compose.yml`](docker-compose.yml) for the default `whutfa` service:
 
 - `privileged: true`
 - `devices: /dev/bus/usb:/dev/bus/usb`
@@ -54,13 +56,13 @@ Check before plugging in a phone:
 ```bash
 # Pull prebuilt image (after CI publish) or build locally:
 docker buildx build --platform linux/amd64,linux/arm64 \
-  -t ghcr.io/mrgraxen/android-auto:latest .
+  -t ghcr.io/mrgraxen/whutfa:latest .
 
 docker compose up -d
 # Open http://<pi-ip>:8080
 ```
 
-**Stub mode (no USB):** `docker compose --profile stub up` — uses `headunit-stub`, which omits USB mounts on purpose.
+**Stub mode (no USB):** `docker compose --profile stub up` — uses `whutfa-stub`, which omits USB mounts on purpose.
 
 **Hardened USB (after it works):** `docker compose --profile cap_usb up` — `privileged: false` but `SYS_ADMIN` + same bus mounts.
 
@@ -73,10 +75,10 @@ Android Auto switches the phone to **Google accessory mode** (`18d1:2d00` / `2d0
 Verify:
 
 ```bash
-docker exec headunit lsusb          # before plug: no phone
+docker exec whutfa lsusb          # before plug: no phone
 # plug phone
-docker exec headunit lsusb          # after ~2s: Google Inc. 18d1:2d00
-docker logs headunit 2>&1 | tail -30
+docker exec whutfa lsusb          # after ~2s: Google Inc. 18d1:2d00
+docker logs whutfa 2>&1 | tail -30
 ```
 
 See [docs/HARDWARE_TEST.md](docs/HARDWARE_TEST.md).
@@ -96,7 +98,8 @@ Open http://localhost:8080
 
 Edit [`config/config.yaml`](config/config.yaml):
 
-- `video.width` / `height` — advertised to phone (1280×720 default)
+- `head_unit.*` — name shown to the phone during USB handshake
+- `video.width` / `height` — advertised resolution (1280×720 default)
 - `server.access_token` — if set, required as `?token=` on HTTP and WebSocket
 - `server.bind_localhost_only` — bind 127.0.0.1 only
 
@@ -111,7 +114,7 @@ Edit [`config/config.yaml`](config/config.yaml):
 ```bash
 # Do not docker build on Pi for daily dev — use CI arm64 images
 docker buildx build --platform linux/amd64,linux/arm64 \
-  -t ghcr.io/mrgraxen/android-auto:latest --push .
+  -t ghcr.io/mrgraxen/whutfa:latest --push .
 
 npm install
 node scripts/generate-fixtures.js
@@ -131,7 +134,7 @@ npm test
 
 | Component | Role |
 |-----------|------|
-| `aa-handler/` | aasdk + Android Auto services → Unix sockets |
+| `aa-handler/` | aasdk + Android Auto protocol → Unix sockets |
 | `server/` | Node.js — IPC → WebSocket bridge, static UI |
 | `frontend/` | WebCodecs + Web Audio + touch |
 

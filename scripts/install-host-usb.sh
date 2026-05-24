@@ -10,8 +10,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-RULES_SRC="${ROOT}/config/99-android-auto-headunit.rules"
-RULES_DEST="/etc/udev/rules.d/99-android-auto-headunit.rules"
+RULES_SRC="${ROOT}/config/99-whutfa.rules"
+RULES_DEST="/etc/udev/rules.d/99-whutfa.rules"
 
 if [[ "$(uname -s)" != "Linux" ]]; then
   echo "install-host-usb: Linux host only (Raspberry Pi or amd64 PC)."
@@ -55,4 +55,4 @@ echo "Host USB setup complete."
 echo "Next steps:"
 echo "  docker compose up -d"
 echo "  ./scripts/preflight-usb.sh"
-echo "  docker exec headunit lsusb    # plug phone; expect 18d1:2d00 or 2d01"
+echo "  docker exec whutfa lsusb    # plug phone; expect 18d1:2d00 or 2d01"

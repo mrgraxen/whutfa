@@ -15,10 +15,10 @@ Run on **Linux host** with USB passthrough to Docker. Not automatable in CI.
 
 ```bash
 docker compose up -d
-docker exec headunit lsusb
+docker exec whutfa lsusb
 # Plug phone
-docker exec headunit lsusb   # expect 18d1:2d00 or 2d01
-docker logs headunit 2>&1 | tail -50
+docker exec whutfa lsusb   # expect 18d1:2d00 or 2d01
+docker logs whutfa 2>&1 | tail -50
 ```
 
 - [ ] Two-step enumeration observed
