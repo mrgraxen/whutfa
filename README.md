@@ -138,6 +138,41 @@ npm test
 | `server/` | Node.js — IPC → WebSocket bridge, static UI |
 | `frontend/` | WebCodecs + Web Audio + touch |
 
+## How the Android Auto integration works
+
+The real (non-stub) path runs entirely in `aa-handler`:
+
+1. `aasdk_runner.cpp` initialises `libusb`, registers a `USBHub` hotplug
+   callback and also runs a one-shot `ConnectedAccessoriesEnumerator` pass so a
+   phone that is already plugged in when WHUTFA starts is picked up immediately.
+2. When a phone attaches, aasdk performs the Android Open Accessory (AOAP)
+   handshake. The device re-enumerates as `18d1:2d00`/`2d01` and the runner
+   wraps it in an `AOAPDevice`.
+3. `whutfa::aa::Session` (`aa-handler/src/aa/Session.cpp`) builds the protocol
+   stack on top of that AOAPDevice: `USBTransport` → `Cryptor` (TLS) →
+   `Messenger` → `ControlServiceChannel` + per-service channels for video,
+   media audio, system audio, input and sensors.
+4. Service event handlers forward H.264 NALs and 16-bit PCM into
+   `IpcBridge::queue_video` / `queue_audio`. The Node server reads those Unix
+   sockets and pushes the data over WebSocket to the browser, which decodes
+   them with `WebCodecs.VideoDecoder` and the Web Audio API.
+5. Touch events from the browser come back through the bridge socket as JSON
+   lines, get parsed by `IpcBridge::bridge_read_loop` and dispatched to the
+   `InputSource` channel as `InputReport` protobuf messages.
+
+### Scope and limitations
+
+- Bluetooth, navigation and microphone services are intentionally not
+  implemented; WHUTFA advertises only video + audio + input + a minimal sensor
+  set. Most phones will still let projection start.
+- The sensor service emits a single driving-status / night-mode tick. Real
+  vehicles stream much more telemetry — easy to extend in `SensorSource`.
+- A device needs to support **USB** Android Auto. Many newer Samsung tablets
+  do not — they only support wireless AA. If projection never starts despite
+  AOA succeeding, that is almost always the reason.
+- Multi-arch CI builds aasdk + aap_protobuf from source, which is slow but
+  required because we link directly against the SDK.
+
 ## Known limitations
 
 - USB in Docker on **macOS/Windows** is unreliable — use stub mode locally, Pi for real USB.
