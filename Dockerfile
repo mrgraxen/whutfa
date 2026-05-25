@@ -43,7 +43,7 @@ COPY scripts/ ./scripts/
 RUN node scripts/generate-fixtures.js
 RUN npm run build --workspace=server
 
-FROM debian:bookworm-slim AS runtime
+FROM node:20-bookworm-slim AS runtime
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libusb-1.0-0 libssl3 libprotobuf32 \
     libboost-system1.74.0 libboost-log1.74.0 \
