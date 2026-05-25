@@ -583,7 +583,7 @@ class Pinger final : public std::enable_shared_from_this<Pinger> {
   using Promise = aasdk::io::Promise<void>;
 
   Pinger(boost::asio::io_service::strand& strand, int duration_ms)
-      : strand_(strand), timer_(strand.get_io_service()), duration_ms_(duration_ms) {}
+      : strand_(strand), timer_(strand.context()), duration_ms_(duration_ms) {}
 
   void ping(Promise::Pointer promise) {
     auto self = shared_from_this();
