@@ -46,12 +46,12 @@ int run_stub_handler(const HandlerConfig& cfg) {
   uint64_t ts = 0;
   while (true) {
     if (!h264.empty()) {
-      ipc.queue_video(ts, h264);
+      ipc.queue_video(ts, h264.data(), h264.size());
       ts += 33'000;
     }
     if (!pcm.empty()) {
-      std::vector<uint8_t> chunk(pcm.begin(), pcm.begin() + std::min(pcm.size(), size_t{1920}));
-      ipc.queue_audio(1, cfg.media_sample_rate, 2, 16, ts, chunk);
+      size_t chunk_len = std::min(pcm.size(), size_t{1920});
+      ipc.queue_audio(1, cfg.media_sample_rate, 2, 16, ts, pcm.data(), chunk_len);
     }
     std::this_thread::sleep_for(std::chrono::milliseconds(33));
   }
